@@ -12,7 +12,7 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: npm install -g dotenv-cli
-            - run: npm run test
+      - run: npm run test
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
