@@ -27,7 +27,8 @@ In this project I used
 - github actions for the ci workflow
 - azure container registry
 - azure app service for continuous delivery
-
+ - Deployment website link
+ `https://sahti.azurewebsites.net/`
 ## Pipeline explained
 - building project and running tests
 ```yaml
