@@ -28,8 +28,8 @@ In this project I used
 - azure container registry
 - azure app service for continuous delivery
 
-##Pipeline explained
--building project and running tests
+## Pipeline explained
+- building project and running tests
 ```yaml
       - run: npm install
       - run: npm install -g dotenv-cli
