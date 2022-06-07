@@ -22,10 +22,54 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## DevOps pipeline project
+In this project I used 
+- github actions for the ci workflow
+- azure container registry
+- azure app service for continuous delivery
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+##Pipeline explained
+-building project and running tests
+```yaml
+      - run: npm install
+      - run: npm install -g dotenv-cli
+      - run: npm run test
+```
+-building docker image and push to azure CR
 
+```yaml
+      - uses: azure/docker-login@v1
+        with:
+          login-server: sahti.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - run: |
+          docker build . -t sahti.azurecr.io/shati:${{ github.sha }}
+          docker image ls
+          docker push sahti.azurecr.io/shati:${{ github.sha }}
+```
+- deploy the new version to azure webapp
+
+
+```yaml
+           - uses: azure/webapps-deploy@v2
+             with:
+               app-name: 'sahti'
+               publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+               images: 'sahti.azurecr.io/sahti:${{ github.sha }}'
+```
+
+- finally we can see the response updated after the latest push
+<img src="./readme_assets/deploy.PNG">
+
+- azure app service config
+<img src="./readme_assets/config.PNG">
+- azure app service scale out and deployment slot config
+<img src="./readme_assets/config2.PNG">
+
+***azure web app name is sahti because the initial plan was about mixing the test & devops labs
+but some problem occurred so I migrate the pipeline to this dummy project which does not affect it functionality***
 ## Installation
 
 ```bash
@@ -58,15 +102,6 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
