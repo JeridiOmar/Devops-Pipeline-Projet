@@ -70,6 +70,12 @@ In this project I used
 
 ***azure web app name is sahti because the initial plan was about mixing the test & devops labs
 but some problem occurred so I migrate the pipeline to this dummy project which does not affect it functionality***
+
+## Actions Screenshots
+<img src="./readme_assets/ci1.PNG">
+<img src="./readme_assets/ci%202.PNG.PNG">
+
+
 ## Installation
 
 ```bash
