@@ -73,7 +73,7 @@ but some problem occurred so I migrate the pipeline to this dummy project which 
 
 ## Actions Screenshots
 <img src="./readme_assets/ci1.PNG">
-<img src="./readme_assets/ci%202.PNG.PNG">
+<img src="./readme_assets/ci%202.PNG">
 
 
 ## Installation
